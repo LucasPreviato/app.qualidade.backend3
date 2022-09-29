@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql'
-import { CreateAddressInput } from 'src/address/dto/create-address.input'
+import { CreateAddressInput } from 'src/addresses/dto/create-address.input'
 
 @InputType()
 export class CreateUnitInput {
