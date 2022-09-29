@@ -6,6 +6,7 @@ import { join } from 'path'
 import { AppService } from './app.service'
 import { PrismaModule } from './prisma/prisma.module'
 import { UnitsModule } from './units/units.module';
+import { AddressesModule } from './addresses/addresses.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UnitsModule } from './units/units.module';
     }),
     PrismaModule,
     UnitsModule,
+    AddressesModule,
   ],
   controllers: [],
   providers: [AppService],
