@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
 import { join } from 'path'
 import { AppService } from './app.service'
+import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AppService } from './app.service'
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
+    PrismaModule,
   ],
   controllers: [],
   providers: [AppService],
