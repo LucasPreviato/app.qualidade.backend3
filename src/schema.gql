@@ -23,6 +23,14 @@ input CreateAddressInput {
   uf: String
 }
 
+input CreateDepartmentInput {
+  email: String
+  initials: String!
+  name: String!
+  phone: String
+  unitId: Int!
+}
+
 input CreateUnitInput {
   address: CreateAddressInput
   email: String
@@ -30,22 +38,35 @@ input CreateUnitInput {
   phone: String
 }
 
+type Department {
+  email: String
+  id: Int!
+  initials: String!
+  name: String!
+  phone: String
+  unitId: Int!
+}
+
 type Mutation {
+  createDepartment(createDepartmentInput: CreateDepartmentInput!): Department!
   createUnit(createUnitInput: CreateUnitInput!): Unit!
   removeAddress(id: Int!): Address!
+  removeDepartment(id: Int!): Department!
   removeUnit(id: Int!): Unit!
-  updateAddress(updateAddressInput: UpdateAddressInput!): Address!
-  updateUnit(updateUnitInput: UpdateUnitInput!): Unit!
+  updateUnit(updateUnitInput: UpdateDepartmentInput!): Department!
 }
 
 type Query {
   address(id: Int!): Address!
   addresses: [Address!]!
+  department(id: Int!): Department!
+  departments: [Department!]!
   unit(id: Int!): Unit!
   units: [Unit!]!
 }
 
 type Unit {
+  departments: [Department!]!
   email: String
   id: Int!
   name: String!
@@ -53,21 +74,11 @@ type Unit {
   unitAddress: Address!
 }
 
-input UpdateAddressInput {
-  cep: String
-  city: String
-  complement: String
-  district: String
-  id: Int!
-  number: String
-  street: String
-  uf: String
-}
-
-input UpdateUnitInput {
-  address: CreateAddressInput
+input UpdateDepartmentInput {
   email: String
   id: Int!
+  initials: String
   name: String
   phone: String
+  unitId: Int
 }

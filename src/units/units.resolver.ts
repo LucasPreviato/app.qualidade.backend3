@@ -13,12 +13,15 @@ import { CreateUnitInput } from './dto/create-unit.input'
 import { UpdateUnitInput } from './dto/update-unit.input'
 import { Address } from 'src/addresses/entities/address.entity'
 import { AddressesService } from 'src/addresses/addresses.service'
+import { Department } from 'src/departments/entities/department.entity'
+import { DepartmentsService } from 'src/departments/departments.service'
 
 @Resolver(() => Unit)
 export class UnitsResolver {
   constructor(
     private readonly unitsService: UnitsService,
     private readonly addressesService: AddressesService,
+    private readonly departmentsService: DepartmentsService,
   ) {}
 
   @Mutation(() => Unit)
@@ -28,6 +31,11 @@ export class UnitsResolver {
 
   @Query(() => [Unit], { name: 'units' })
   findAll() {
+    return this.unitsService.findAll()
+  }
+
+  @ResolveField(() => [Department])
+  departments() {
     return this.unitsService.findAll()
   }
 

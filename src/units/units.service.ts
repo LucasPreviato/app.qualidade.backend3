@@ -32,11 +32,25 @@ export class UnitsService {
     })
   }
 
-  update(id: number, updateUnitInput: UpdateUnitInput) {
-    return `This action updates a #${id} unit`
+  update(id: number, { address, email, name, phone }: UpdateUnitInput) {
+    return this.prisma.unit.update({
+      where: { id },
+      data: {
+        email,
+        name,
+        phone,
+        address: {
+          update: {
+            ...address,
+          },
+        },
+      },
+    })
   }
 
   remove(id: number) {
-    return `This action removes a #${id} unit`
+    return this.prisma.unit.delete({
+      where: { id },
+    })
   }
 }

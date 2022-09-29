@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
-import { UpdateAddressInput } from './dto/update-address.input'
 
 @Injectable()
 export class AddressesService {
@@ -16,11 +15,9 @@ export class AddressesService {
     })
   }
 
-  update(id: number, updateAddressInput: UpdateAddressInput) {
-    return `This action updates a #${id} address`
-  }
-
   remove(id: number) {
-    return `This action removes a #${id} address`
+    return this.prisma.address.delete({
+      where: { id },
+    })
   }
 }
