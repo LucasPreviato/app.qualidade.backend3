@@ -45,15 +45,20 @@ model Address {
 model JobCategory {
   id         Int          @id @default(autoincrement())
   name       String       @unique
-  Occupation Occupation[]
+  occupation Occupation[]
 }
 
 model Occupation {
-  id            Int         @id @default(autoincrement())
-  name          String      @unique
-  version       Int         @default(autoincrement())
-  revisionAt    DateTime    @default(now())
-  alterations   String
-  jobcategory   JobCategory @relation(fields: [jobCategoryId], references: [id])
-  jobCategoryId Int
+  id                  Int         @id @default(autoincrement())
+  name                String      @unique
+  version             Int         @default(autoincrement())
+  revisionAt          DateTime    @default(now())
+  alterations         String
+  skills              String?
+  formation           String?
+  mandatoryExperience String?
+  desirableExperience String?
+  tasks               String?
+  jobcategory         JobCategory @relation(fields: [jobCategoryId], references: [id])
+  jobCategoryId       Int
 }
