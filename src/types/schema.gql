@@ -67,10 +67,10 @@ type Query {
 
 type Unit {
   email: String
+  getUnitAddress: Address!
   id: Int!
   name: String!
   phone: String
-  unitAddress: Address!
 }
 
 input UpdateDepartmentInput {

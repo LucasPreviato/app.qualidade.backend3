@@ -43,14 +43,17 @@ model Address {
 }
 
 model JobCategory {
-  id   Int    @id @default(autoincrement())
-  name String @unique
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  Occupation Occupation[]
 }
 
 model Occupation {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
-  version     Int      @default(autoincrement())
-  revisionAt  DateTime @default(now())
-  alterations String
+  id            Int         @id @default(autoincrement())
+  name          String      @unique
+  version       Int         @default(autoincrement())
+  revisionAt    DateTime    @default(now())
+  alterations   String
+  jobcategory   JobCategory @relation(fields: [jobCategoryId], references: [id])
+  jobCategoryId Int
 }

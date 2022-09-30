@@ -59,4 +59,5 @@ export class DepartmentsResolver {
   removeDepartment(@Args('id', { type: () => Int }) id: number) {
     return this.departmentsService.remove(id)
   }
+  
 }
