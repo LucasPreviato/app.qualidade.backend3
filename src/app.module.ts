@@ -15,7 +15,7 @@ import { DepartmentsModule } from './departments/departments.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
       sortSchema: true,
     }),
     PrismaModule,

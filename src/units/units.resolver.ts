@@ -34,10 +34,10 @@ export class UnitsResolver {
     return this.unitsService.findAll()
   }
 
-  @ResolveField(() => [Department])
-  departments() {
-    return this.unitsService.findAll()
-  }
+  // @ResolveField(() => [Department])
+  // departments() {
+  //   return this.unitsService.findAll()
+  // }
 
   @ResolveField(() => Address)
   unitAddress(@Parent() unit: Unit) {

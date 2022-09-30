@@ -44,7 +44,7 @@ type Department {
   initials: String!
   name: String!
   phone: String
-  unitId: Int!
+  unit: Unit!
 }
 
 type Mutation {
@@ -66,7 +66,6 @@ type Query {
 }
 
 type Unit {
-  departments: [Department!]!
   email: String
   id: Int!
   name: String!

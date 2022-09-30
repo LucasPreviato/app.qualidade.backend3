@@ -33,10 +33,10 @@ export class DepartmentsResolver {
     return this.departmentsService.findAll()
   }
 
-  @ResolveField(() => Int)
-  unitId(departments: Department) {
-    const { id } = departments
-
+  @ResolveField(() => Unit)
+  unit(@Parent()department: Department) {
+    const { id } = department
+    console.log(department)
     return this.unitsService.findOne(id)
   }
 
