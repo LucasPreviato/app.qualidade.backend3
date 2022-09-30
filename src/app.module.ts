@@ -9,6 +9,7 @@ import { UnitsModule } from './units/units.module';
 import { AddressesModule } from './addresses/addresses.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { JobcategoriesModule } from './jobcategories/jobcategories.module';
+import { CollaboratorsModule } from './collaborators/collaborators.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { JobcategoriesModule } from './jobcategories/jobcategories.module';
     AddressesModule,
     DepartmentsModule,
     JobcategoriesModule,
+    CollaboratorsModule,
   ],
   controllers: [],
   providers: [AppService],
