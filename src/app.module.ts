@@ -7,6 +7,7 @@ import { AppService } from './app.service'
 import { PrismaModule } from './prisma/prisma.module'
 import { UnitsModule } from './units/units.module';
 import { AddressesModule } from './addresses/addresses.module';
+import { DepartmentsModule } from './departments/departments.module';
 
 @Module({
   imports: [
@@ -14,12 +15,13 @@ import { AddressesModule } from './addresses/addresses.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), 'src/types/schema.gql'),
       sortSchema: true,
     }),
     PrismaModule,
     UnitsModule,
     AddressesModule,
+    DepartmentsModule,
   ],
   controllers: [],
   providers: [AppService],
