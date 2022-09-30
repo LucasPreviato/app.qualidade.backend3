@@ -46,8 +46,8 @@ export class DepartmentsResolver {
   }
 
   @Mutation(() => Department)
-  updateUnit(
-    @Args('updateUnitInput') updateDepartmentInput: UpdateDepartmentInput,
+  updateDepartment(
+    @Args('updateDepartmentInput') updateDepartmentInput: UpdateDepartmentInput,
   ) {
     return this.departmentsService.update(
       updateDepartmentInput.id,
