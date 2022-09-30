@@ -8,6 +8,7 @@ import { PrismaModule } from './prisma/prisma.module'
 import { UnitsModule } from './units/units.module';
 import { AddressesModule } from './addresses/addresses.module';
 import { DepartmentsModule } from './departments/departments.module';
+import { JobcategoriesModule } from './jobcategories/jobcategories.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { DepartmentsModule } from './departments/departments.module';
     UnitsModule,
     AddressesModule,
     DepartmentsModule,
+    JobcategoriesModule,
   ],
   controllers: [],
   providers: [AppService],
