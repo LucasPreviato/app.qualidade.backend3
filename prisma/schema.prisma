@@ -11,22 +11,24 @@ datasource db {
 }
 
 model Unit {
-  id          Int          @id @default(autoincrement())
-  name        String       @unique
-  email       String?
-  phone       String?
-  departments Department[]
-  address     Address?
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  email        String?
+  phone        String?
+  departments  Department[]
+  address      Address?
+  collaborator Collaborator[]
 }
 
 model Department {
-  id       Int     @id @default(autoincrement())
-  unitId   Int
-  name     String
-  initials String
-  email    String?
-  phone    String?
-  unit     Unit    @relation(fields: [unitId], references: [id])
+  id           Int            @id @default(autoincrement())
+  unitId       Int
+  name         String
+  initials     String
+  email        String?
+  phone        String?
+  unit         Unit           @relation(fields: [unitId], references: [id])
+  Collaborator Collaborator[]
 }
 
 model Address {
@@ -49,16 +51,56 @@ model JobCategory {
 }
 
 model Occupation {
-  id                  Int         @id @default(autoincrement())
-  name                String      @unique
-  version             Int         @default(autoincrement())
-  revisionAt          DateTime    @default(now())
+  id                  Int            @id @default(autoincrement())
+  name                String         @unique
+  version             Int            @default(autoincrement())
+  revisionAt          DateTime       @default(now())
   alterations         String
   skills              String?
   formation           String?
   mandatoryExperience String?
   desirableExperience String?
   tasks               String?
-  jobcategory         JobCategory @relation(fields: [jobCategoryId], references: [id])
+  jobcategory         JobCategory    @relation(fields: [jobCategoryId], references: [id])
   jobCategoryId       Int
+  Collaborator        Collaborator[]
+}
+
+model Collaborator {
+  id                   Int        @id @default(autoincrement())
+  admissionAt          DateTime
+  name                 String
+  email                String
+  bond                 Bond       @default(CLT)
+  status               Status     @default(ACTIVE)
+  tasks                String?
+  personalpresentation String?
+  fiveYears            String?
+  pros                 String?
+  cons                 String?
+  obsGeneral           String?
+  unit                 Unit       @relation(fields: [unitId], references: [id])
+  unitId               Int
+  department           Department @relation(fields: [departmentId], references: [id])
+  departmentId         Int
+  occupation           Occupation @relation(fields: [occupationId], references: [id])
+  occupationId         Int
+}
+
+enum Bond {
+  CLT
+  PJ
+  COOPERATIVE
+  TRAINEE
+  OWNER
+  PARTNER
+  OUTSOURCED
+}
+
+enum Status {
+  ACTIVE
+  EXPERIENCE
+  MOVEMENT
+  NA
+  AWAY
 }
