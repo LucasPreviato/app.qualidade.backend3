@@ -13,6 +13,34 @@ type Address {
   uf: String
 }
 
+enum Bond {
+  CLT
+  COOPERATIVE
+  OUTSOURCED
+  OWNER
+  PARTNER
+  PJ
+  TRAINEE
+}
+
+type Collaborator {
+  admissionAt: DateTime
+  bond: Bond
+  cons: String
+  department: Department!
+  email: String!
+  fiveYears: String
+  id: Int!
+  name: String!
+  obsGeneral: String
+  occupation: Occupation!
+  personalpresentation: String
+  pros: String
+  status: Status
+  tasks: String
+  unit: Unit!
+}
+
 input CreateAddressInput {
   cep: String
   city: String!
@@ -23,6 +51,23 @@ input CreateAddressInput {
   uf: String
 }
 
+input CreateCollaboratorInput {
+  admissionAt: DateTime
+  bond: Bond
+  cons: String
+  departmentId: Int!
+  email: String!
+  fiveYears: String
+  name: String!
+  obsGeneral: String
+  occupationId: Int!
+  personalpresentation: String
+  pros: String
+  status: Status
+  tasks: String
+  unitId: Int!
+}
+
 input CreateDepartmentInput {
   email: String
   initials: String!
@@ -31,12 +76,27 @@ input CreateDepartmentInput {
   unitId: Int!
 }
 
+input CreateJobcategoryInput {
+  name: String!
+}
+
+input CreateOccupationInput {
+  alterations: String!
+  jobCategoryId: Int!
+  name: String!
+}
+
 input CreateUnitInput {
   address: CreateAddressInput
   email: String
   name: String!
   phone: String
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Department {
   email: String
@@ -47,22 +107,61 @@ type Department {
   unit: Unit!
 }
 
+type Jobcategory {
+  """id field"""
+  id: Int!
+  name: String!
+}
+
 type Mutation {
+  createCollaborator(createCollaboratorInput: CreateCollaboratorInput!): Collaborator!
   createDepartment(createDepartmentInput: CreateDepartmentInput!): Department!
+  createJobcategory(createJobcategoryInput: CreateJobcategoryInput!): Jobcategory!
+  createOccupation(createOccupationInput: CreateOccupationInput!): Occupation!
   createUnit(createUnitInput: CreateUnitInput!): Unit!
   removeAddress(id: Int!): Address!
+  removeCollaborator(id: Int!): Collaborator!
   removeDepartment(id: Int!): Department!
+  removeJobcategory(id: Int!): Jobcategory!
+  removeOccupation(id: Int!): Occupation!
   removeUnit(id: Int!): Unit!
-  updateUnit(updateUnitInput: UpdateDepartmentInput!): Department!
+  updateCollaborator(updateCollaboratorInput: UpdateCollaboratorInput!): Collaborator!
+  updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
+  updateJobcategory(updateJobcategoryInput: UpdateJobcategoryInput!): Jobcategory!
+  updateOccupation(updateOccupationInput: UpdateOccupationInput!): Occupation!
+  updateUnit(updateUnitInput: UpdateUnitInput!): Unit!
+}
+
+type Occupation {
+  alterations: String!
+  id: Int!
+  jobcategory: Jobcategory!
+  name: String!
+  revisionAt: DateTime!
+  version: Int!
 }
 
 type Query {
   address(id: Int!): Address!
   addresses: [Address!]!
+  collaborator(id: Int!): Collaborator!
+  collaborators: [Collaborator!]!
   department(id: Int!): Department!
   departments: [Department!]!
+  jobcategories: [Jobcategory!]!
+  jobcategory(id: Int!): Jobcategory!
+  occupation(id: Int!): Occupation!
+  occupations: [Occupation!]!
   unit(id: Int!): Unit!
   units: [Unit!]!
+}
+
+enum Status {
+  ACTIVE
+  AWAY
+  EXPERIENCE
+  MOVEMENT
+  NA
 }
 
 type Unit {
@@ -73,6 +172,24 @@ type Unit {
   phone: String
 }
 
+input UpdateCollaboratorInput {
+  admissionAt: DateTime
+  bond: Bond
+  cons: String
+  departmentId: Int
+  email: String
+  fiveYears: String
+  id: Int!
+  name: String
+  obsGeneral: String
+  occupationId: Int
+  personalpresentation: String
+  pros: String
+  status: Status
+  tasks: String
+  unitId: Int
+}
+
 input UpdateDepartmentInput {
   email: String
   id: Int!
@@ -80,4 +197,24 @@ input UpdateDepartmentInput {
   name: String
   phone: String
   unitId: Int
+}
+
+input UpdateJobcategoryInput {
+  id: Int!
+  name: String
+}
+
+input UpdateOccupationInput {
+  alterations: String
+  id: Int!
+  jobCategoryId: Int
+  name: String
+}
+
+input UpdateUnitInput {
+  address: CreateAddressInput
+  email: String
+  id: Int!
+  name: String
+  phone: String
 }

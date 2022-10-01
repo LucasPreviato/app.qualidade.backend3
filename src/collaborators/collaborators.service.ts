@@ -1,28 +1,125 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCollaboratorInput } from './dto/create-collaborator.input';
-import { UpdateCollaboratorInput } from './dto/update-collaborator.input';
+import { Injectable } from '@nestjs/common'
+import { PrismaService } from 'src/prisma/prisma.service'
+import { CreateCollaboratorInput } from './dto/create-collaborator.input'
+import { UpdateCollaboratorInput } from './dto/update-collaborator.input'
 
 @Injectable()
 export class CollaboratorsService {
-  constructor(private prisma : PrismaService){}
-  create(createCollaboratorInput: CreateCollaboratorInput) {
-    return this.prisma.collaborator.create({data:{...createCollaboratorInput}});
+  constructor(private prisma: PrismaService) {}
+
+  create({
+    admissionAt,
+    departmentId,
+    email,
+    name,
+    unitId,
+    bond,
+    cons,
+    fiveYears,
+    obsGeneral,
+    personalpresentation,
+    pros,
+    status,
+    tasks,
+    occupationId,
+  }: CreateCollaboratorInput) {
+    return this.prisma.collaborator.create({
+      data: {
+        admissionAt,
+        email,
+        name,
+        bond,
+        cons,
+        fiveYears,
+        obsGeneral,
+        personalpresentation,
+        pros,
+        status,
+        tasks,
+        department: {
+          connect: {
+            id: departmentId,
+          },
+        },
+        unit: {
+          connect: {
+            id: unitId,
+          },
+        },
+        occupation: {
+          connect: {
+            id: occupationId,
+          },
+        },
+      },
+    })
   }
 
   findAll() {
-    return `This action returns all collaborators`;
+    return this.prisma.collaborator.findMany()
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} collaborator`;
+    return this.prisma.collaborator.findUnique({
+      where: { id },
+    })
   }
 
-  update(id: number, updateCollaboratorInput: UpdateCollaboratorInput) {
-    return `This action updates a #${id} collaborator`;
+  update(
+    id: number,
+    {
+      admissionAt,
+      departmentId,
+      email,
+      name,
+      occupationId,
+      unitId,
+      bond,
+      cons,
+      fiveYears,
+      obsGeneral,
+      personalpresentation,
+      pros,
+      status,
+      tasks,
+    }: UpdateCollaboratorInput,
+  ) {
+    return this.prisma.collaborator.update({
+      where: { id },
+      data: {
+        admissionAt,
+        email,
+        name,
+        bond,
+        cons,
+        fiveYears,
+        obsGeneral,
+        personalpresentation,
+        pros,
+        status,
+        tasks,
+        department: {
+          update: {
+            id: departmentId,
+          },
+        },
+        unit: {
+          update: {
+            id: unitId,
+          },
+        },
+        occupation: {
+          update: {
+            id: occupationId,
+          },
+        },
+      },
+    })
   }
 
   remove(id: number) {
-    return `This action removes a #${id} collaborator`;
+    return this.prisma.collaborator.delete({
+      where: { id },
+    })
   }
 }

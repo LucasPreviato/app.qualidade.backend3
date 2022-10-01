@@ -33,25 +33,26 @@ export class UnitsResolver {
   getUnits() {
     return this.unitsService.findAll()
   }
-  
+
   @Query(() => Unit, { name: 'unit' })
   getUnit(@Args('id', { type: () => Int }) id: number) {
     return this.unitsService.findOne(id)
   }
-  
+
   @Mutation(() => Unit)
   updateUnit(@Args('updateUnitInput') updateUnitInput: UpdateUnitInput) {
     return this.unitsService.update(updateUnitInput.id, updateUnitInput)
   }
-  
+
   @Mutation(() => Unit)
   removeUnit(@Args('id', { type: () => Int }) id: number) {
     return this.unitsService.remove(id)
   }
+
   @ResolveField(() => Address)
   getUnitAddress(@Parent() unit: Unit) {
     const { id } = unit
-  
+
     return this.addressesService.findOne(id)
   }
 }

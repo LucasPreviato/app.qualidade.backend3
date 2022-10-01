@@ -1,34 +1,47 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
-import { Bond, Status } from '@prisma/client';
+import { InputType, Int, Field } from '@nestjs/graphql'
+import { Bond, Status } from '@prisma/client'
 
 @InputType()
 export class CreateCollaboratorInput {
+  @Field(() => Date, { nullable: true })
+  admissionAt?: Date
+
   @Field()
-  admissionAt: Date;
+  name: string
+
   @Field()
-  name: string;
-  @Field()
-  email: string;
-  @Field(()=> Bond)
-  bond?: Bond;
-  @Field(()=> Status)
-  status?: Status;
-  @Field()
-  tasks?: string;
-  @Field()
-  personalpresentation?: string;
-  @Field()
-  fiveYears?: string;
-  @Field()
-  pros?: string;
-  @Field()
-  cons?: string;
-  @Field()
-  obsGeneral?: string;
-  @Field()
-  unitId: number;
-  @Field(()=> Int)
-  departmentId: number;
-  @Field(()=> Int)
-  occupationId: number;
+  email: string
+
+  @Field(() => Bond, { nullable: true })
+  bond?: Bond
+
+  @Field(() => Status, { nullable: true })
+  status?: Status
+
+  @Field({ nullable: true })
+  tasks?: string
+
+  @Field({ nullable: true })
+  personalpresentation?: string
+
+  @Field({ nullable: true })
+  fiveYears?: string
+
+  @Field({ nullable: true })
+  pros?: string
+
+  @Field({ nullable: true })
+  cons?: string
+
+  @Field({ nullable: true })
+  obsGeneral?: string
+
+  @Field(() => Int)
+  unitId: number
+
+  @Field(() => Int)
+  departmentId: number
+
+  @Field(() => Int)
+  occupationId: number
 }
