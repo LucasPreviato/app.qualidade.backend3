@@ -33,21 +33,14 @@ export class DepartmentsResolver {
     return this.departmentsService.findAll()
   }
 
-  @ResolveField(() => Unit)
-  unit(@Parent()department: Department) {
-    const { id } = department
-    console.log(department)
-    return this.unitsService.findOne(id)
-  }
-
   @Query(() => Department, { name: 'department' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.departmentsService.findOne(id)
   }
 
   @Mutation(() => Department)
-  updateUnit(
-    @Args('updateUnitInput') updateDepartmentInput: UpdateDepartmentInput,
+  updateDepartment(
+    @Args('updateDepartmentInput') updateDepartmentInput: UpdateDepartmentInput,
   ) {
     return this.departmentsService.update(
       updateDepartmentInput.id,
@@ -58,5 +51,12 @@ export class DepartmentsResolver {
   @Mutation(() => Department)
   removeDepartment(@Args('id', { type: () => Int }) id: number) {
     return this.departmentsService.remove(id)
+  }
+
+  @ResolveField(() => Unit)
+  unit(@Parent() department: Department) {
+    const { id } = department
+
+    return this.unitsService.findOne(id)
   }
 }

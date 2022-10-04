@@ -30,24 +30,12 @@ export class UnitsResolver {
   }
 
   @Query(() => [Unit], { name: 'units' })
-  findAll() {
+  getUnits() {
     return this.unitsService.findAll()
   }
 
-  // @ResolveField(() => [Department])
-  // departments() {
-  //   return this.unitsService.findAll()
-  // }
-
-  @ResolveField(() => Address)
-  unitAddress(@Parent() unit: Unit) {
-    const { id } = unit
-
-    return this.addressesService.findOne(id)
-  }
-
   @Query(() => Unit, { name: 'unit' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  getUnit(@Args('id', { type: () => Int }) id: number) {
     return this.unitsService.findOne(id)
   }
 
@@ -59,5 +47,12 @@ export class UnitsResolver {
   @Mutation(() => Unit)
   removeUnit(@Args('id', { type: () => Int }) id: number) {
     return this.unitsService.remove(id)
+  }
+
+  @ResolveField(() => Address)
+  getUnitAddress(@Parent() unit: Unit) {
+    const { id } = unit
+
+    return this.addressesService.findOne(id)
   }
 }
