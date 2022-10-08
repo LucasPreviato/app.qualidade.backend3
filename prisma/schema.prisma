@@ -104,3 +104,10 @@ enum Status {
   NA
   AWAY
 }
+
+model User {
+  id       String @id @default(cuid())
+  name     String
+  login    String
+  password String
+}
