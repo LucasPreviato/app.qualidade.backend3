@@ -38,10 +38,8 @@ services:
     ports:
       - "3333:3333"
     restart: always
+    volumes:
+      - ./:/home/api
 volumes:
   database-data:
   pgadmin-data:
-      
-
-  
-    
