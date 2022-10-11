@@ -240,5 +240,5 @@ type User {
 
   """Example field (placeholder)"""
   id: String!
-  password: String!
+  password: String
 }

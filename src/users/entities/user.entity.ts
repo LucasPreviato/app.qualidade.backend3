@@ -6,7 +6,7 @@ export class User {
   id?: string;
   @Field()
   email  : string
-  @Field()
-  password :string
+  @Field({nullable : true})
+  password? :string
 }
 
