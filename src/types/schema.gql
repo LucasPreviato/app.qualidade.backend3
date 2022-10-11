@@ -93,6 +93,11 @@ input CreateUnitInput {
   phone: String
 }
 
+input CreateUserInput {
+  email: String!
+  password: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -119,17 +124,20 @@ type Mutation {
   createJobcategory(createJobcategoryInput: CreateJobcategoryInput!): Jobcategory!
   createOccupation(createOccupationInput: CreateOccupationInput!): Occupation!
   createUnit(createUnitInput: CreateUnitInput!): Unit!
+  createUser(createUserInput: CreateUserInput!): User!
   removeAddress(id: Int!): Address!
   removeCollaborator(id: Int!): Collaborator!
   removeDepartment(id: Int!): Department!
   removeJobcategory(id: Int!): Jobcategory!
   removeOccupation(id: Int!): Occupation!
   removeUnit(id: Int!): Unit!
+  removeUser(id: Int!): User!
   updateCollaborator(updateCollaboratorInput: UpdateCollaboratorInput!): Collaborator!
   updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
   updateJobcategory(updateJobcategoryInput: UpdateJobcategoryInput!): Jobcategory!
   updateOccupation(updateOccupationInput: UpdateOccupationInput!): Occupation!
   updateUnit(updateUnitInput: UpdateUnitInput!): Unit!
+  updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Occupation {
@@ -154,6 +162,8 @@ type Query {
   occupations: [Occupation!]!
   unit(id: Int!): Unit!
   units: [Unit!]!
+  user(id: Int!): User!
+  users: [User!]!
 }
 
 enum Status {
@@ -217,4 +227,18 @@ input UpdateUnitInput {
   id: Int!
   name: String
   phone: String
+}
+
+input UpdateUserInput {
+  email: String
+  id: Int!
+  password: String
+}
+
+type User {
+  email: String!
+
+  """Example field (placeholder)"""
+  id: String!
+  password: String!
 }
