@@ -15,7 +15,7 @@ import { LocalStrategy } from './strategies/local-strategy';
             signOptions :{expiresIn:"30d"},
         })
     ],
-    providers: [AuthService, LocalStrategy, JwtStrategy, AuthResolver]
+    providers: [AuthService, LocalStrategy, AuthResolver]
 })
 export class AuthModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {

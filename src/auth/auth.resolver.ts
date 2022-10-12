@@ -7,9 +7,9 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 export class AuthResolver {
     constructor(private readonly authService: AuthService) {}
 
-    @Mutation(() => Login)
-    @UseGuards(LocalAuthGuard)
-    login(@Args('createUserInput') {
-    //   return  this.authService.login();
-    }
+    // @Mutation(() => Login)
+    // @UseGuards(LocalAuthGuard)
+    // login(@Args('createUserInput') {
+    // //   return  this.authService.login();
+    // }
 }
