@@ -5,6 +5,7 @@ import { UsersModule } from 'src/users/users.module';
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { LocalStrategy } from './strategies/local-strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
     imports : [
@@ -15,7 +16,7 @@ import { LocalStrategy } from './strategies/local-strategy';
             signOptions :{expiresIn:"30d"},
         })
     ],
-    providers: [AuthService, LocalStrategy, AuthResolver]
+    providers: [AuthService, LocalStrategy,JwtStrategy, AuthResolver]
 })
 export class AuthModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
