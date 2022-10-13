@@ -39,7 +39,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard'
   providers: [AppService,
   {
     provide: APP_GUARD,
-    userClass: JwtAuthGuard,
+    useClass: JwtAuthGuard,
   }
   ],
 })

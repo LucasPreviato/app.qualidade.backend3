@@ -1,6 +1,7 @@
 import { Request, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
+import { isPublic } from './decorators/is-public.decorator';
 import { LoginUserInput } from './dto/login-user.input';
 import { UserToken } from './dto/user-token';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -11,6 +12,7 @@ export class AuthResolver {
 
     @Mutation(() => UserToken)
     @UseGuards(LocalAuthGuard)
+    @isPublic()
     login(@Args('loginUserInput' )loginUserInput : LoginUserInput) {
       return  this.authService.login(loginUserInput);
     }

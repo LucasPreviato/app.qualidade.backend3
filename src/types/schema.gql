@@ -118,6 +118,11 @@ type Jobcategory {
   name: String!
 }
 
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   createCollaborator(createCollaboratorInput: CreateCollaboratorInput!): Collaborator!
   createDepartment(createDepartmentInput: CreateDepartmentInput!): Department!
@@ -125,6 +130,7 @@ type Mutation {
   createOccupation(createOccupationInput: CreateOccupationInput!): Occupation!
   createUnit(createUnitInput: CreateUnitInput!): Unit!
   createUser(createUserInput: CreateUserInput!): User!
+  login(loginUserInput: LoginUserInput!): UserToken!
   removeAddress(id: Int!): Address!
   removeCollaborator(id: Int!): Collaborator!
   removeDepartment(id: Int!): Department!
@@ -241,4 +247,9 @@ type User {
   """Example field (placeholder)"""
   id: String!
   password: String
+}
+
+type UserToken {
+  access_token: String!
+  user: User!
 }

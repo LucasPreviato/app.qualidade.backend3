@@ -18,8 +18,6 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     ],
     providers: [AuthService, LocalStrategy,JwtStrategy, AuthResolver]
 })
-export class AuthModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        throw new Error('Method not implemented.');
-    }
+export class AuthModule  {
+   
 }

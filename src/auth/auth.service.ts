@@ -9,7 +9,23 @@ import { UserToken } from './dto/user-token';
 export class AuthService {
     constructor ( private readonly usersService : UsersService, private readonly jwtService : JwtService){}
 
-    async login({email}: LoginUserInput) : Promise<UserToken> {
+    async validateUser(email: string, password: string) {
+        const user = await this.usersService.findByEmail(email);
+        
+        if(user){
+            const  isPasswordValid = await  bcrypt.compare(password, user.password);
+            
+            if ( isPasswordValid){
+                return {
+                    ...user,
+                    password: undefined
+                }
+            }
+        }
+        throw new Error("Email address or password provided is incorrect.")
+    }
+    
+    async login({email,}: LoginUserInput) : Promise<UserToken> {
        const user = await this.usersService.findByEmail(email);
         const {password, ...result} = user
         const payload : UserPayload = {
@@ -21,20 +37,5 @@ export class AuthService {
           access_token: jwtToken,
           user : result
         }
-    }
-    async validateUser(email: string, password: string) {
-       const user = await this.usersService.findByEmail(email);
-
-       if(user){
-        const  isPasswordValid = await  bcrypt.compare(password, user.password);
-
-        if ( isPasswordValid){
-            return {
-                ...user,
-                password: undefined
-            }
-        }
-       }
-       throw new Error("Email address or password provided is incorrect.")
     }
 }
