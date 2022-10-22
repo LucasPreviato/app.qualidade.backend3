@@ -12,6 +12,7 @@ import { JobcategoriesModule } from './jobcategories/jobcategories.module';
 import { CollaboratorsModule } from './collaborators/collaborators.module';
 import { OccupationsModule } from './occupations/occupations.module';
 import { UsersModule } from './users/users.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
